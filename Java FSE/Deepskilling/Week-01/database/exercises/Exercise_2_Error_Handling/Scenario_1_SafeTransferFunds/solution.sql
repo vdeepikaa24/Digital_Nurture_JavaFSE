@@ -1,29 +1,25 @@
-SET SERVEROUTPUT ON;
-
-CREATE OR REPLACE PROCEDURE SafeTransferFunds(
-    p_from_acc IN INT, 
-    p_to_acc IN INT, 
-    p_amount IN NUMBER
-) IS
-    v_balance NUMBER;
+CREATE OR REPLACE PROCEDURE UpdateSalary (
+    p_emp_id IN NUMBER,
+    p_percentage IN NUMBER
+) AS
+    v_rows_affected NUMBER;
 BEGIN
-    -- Check balance in ACCOUNTS table
-    SELECT BALANCE INTO v_balance FROM ACCOUNTS WHERE ACCOUNTID = p_from_acc;
-    
-    -- Error handling for insufficient funds
-    IF v_balance < p_amount THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Insufficient funds for transfer.');
+    UPDATE Employees 
+    SET Salary = Salary + (Salary * (p_percentage / 100))
+    WHERE EmployeeID = p_emp_id;
+
+    v_rows_affected := SQL%ROWCOUNT;
+
+    IF v_rows_affected = 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Error: Employee ID ' || p_emp_id || ' does not exist.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Salary updated successfully for Employee ID ' || p_emp_id);
+        COMMIT;
     END IF;
 
-    -- Perform the transfer
-    UPDATE ACCOUNTS SET BALANCE = BALANCE - p_amount WHERE ACCOUNTID = p_from_acc;
-    UPDATE ACCOUNTS SET BALANCE = BALANCE + p_amount WHERE ACCOUNTID = p_to_acc;
-    
-    COMMIT;
-    DBMS_OUTPUT.PUT_LINE('Transfer successful.');
 EXCEPTION
     WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Logging Error: ' || SQLERRM);
         ROLLBACK;
-        DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
 END;
 /

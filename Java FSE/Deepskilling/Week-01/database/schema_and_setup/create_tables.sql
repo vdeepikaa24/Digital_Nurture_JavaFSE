@@ -1,9 +1,15 @@
--- Drop old tables if they exist to prevent name conflicts
-DROP TABLE Loans CASCADE CONSTRAINTS;
-DROP TABLE Customers CASCADE CONSTRAINTS;
-DROP TABLE ACCOUNTS CASCADE CONSTRAINTS; 
+-- Use this block to drop tables safely without stopping if they don't exist
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE Loans CASCADE CONSTRAINTS';
+    EXECUTE IMMEDIATE 'DROP TABLE Customers CASCADE CONSTRAINTS';
+    EXECUTE IMMEDIATE 'DROP TABLE ACCOUNTS CASCADE CONSTRAINTS';
+    EXECUTE IMMEDIATE 'DROP TABLE Employees CASCADE CONSTRAINTS';
+EXCEPTION 
+    WHEN OTHERS THEN NULL; 
+END;
+/
 
--- 1. Customers Table
+-- Now Create your tables
 CREATE TABLE Customers (
     CustomerID NUMBER PRIMARY KEY,
     Name VARCHAR2(100),
@@ -12,7 +18,6 @@ CREATE TABLE Customers (
     IsVIP VARCHAR2(10) DEFAULT 'FALSE'
 );
 
--- 2. Loans Table
 CREATE TABLE Loans (
     LoanID NUMBER PRIMARY KEY,
     CustomerID NUMBER,
@@ -21,8 +26,13 @@ CREATE TABLE Loans (
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
--- 3. ACCOUNTS Table
 CREATE TABLE ACCOUNTS (
     ACCOUNTID NUMBER PRIMARY KEY,
     BALANCE NUMBER
+);
+
+CREATE TABLE Employees (
+    EmployeeID NUMBER PRIMARY KEY,
+    Name VARCHAR2(100),
+    Salary NUMBER
 );

@@ -1,22 +1,33 @@
--- Clear old table data safely
-DELETE FROM Loans; 
-DELETE FROM Customers;
-DELETE FROM ACCOUNTS;
+-- 1. Clear everything and recreate tables (using the safe block)
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE Loans CASCADE CONSTRAINTS';
+    EXECUTE IMMEDIATE 'DROP TABLE Customers CASCADE CONSTRAINTS';
+    EXECUTE IMMEDIATE 'DROP TABLE ACCOUNTS CASCADE CONSTRAINTS';
+    EXECUTE IMMEDIATE 'DROP TABLE Employees CASCADE CONSTRAINTS';
+EXCEPTION WHEN OTHERS THEN NULL;
+END;
+/
 
--- Insert exact sample customer rows matching your classmate's setup
-INSERT INTO Customers (CustomerID, Name, Age, Balance, IsVIP) VALUES (3, 'Priya', 70, 20000, 'FALSE');
-INSERT INTO Customers (CustomerID, Name, Age, Balance, IsVIP) VALUES (1, 'Sanjai', 65, 15000, 'FALSE');
-INSERT INTO Customers (CustomerID, Name, Age, Balance, IsVIP) VALUES (2, 'Rahul', 45, 8000, 'FALSE');
-INSERT INTO Customers (CustomerID, Name, Age, Balance, IsVIP) VALUES (4, 'Kumar', 55, 12000, 'FALSE');
+CREATE TABLE Customers (CustomerID NUMBER PRIMARY KEY, Name VARCHAR2(100), Age NUMBER, Balance NUMBER, IsVIP VARCHAR2(10) DEFAULT 'FALSE');
+CREATE TABLE Loans (LoanID NUMBER PRIMARY KEY, CustomerID NUMBER, InterestRate NUMBER, DueDate DATE, FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID));
+CREATE TABLE ACCOUNTS (ACCOUNTID NUMBER PRIMARY KEY, BALANCE NUMBER);
+CREATE TABLE Employees (EmployeeID NUMBER PRIMARY KEY, Name VARCHAR2(100), Salary NUMBER);
 
--- Insert exact sample loan records matching your classmate's setup
-INSERT INTO Loans (LoanID, CustomerID, InterestRate, DueDate) VALUES (101, 1, 9, TO_DATE('2026-07-15', 'YYYY-MM-DD'));
-INSERT INTO Loans (LoanID, CustomerID, InterestRate, DueDate) VALUES (102, 2, 12, TO_DATE('2026-08-20', 'YYYY-MM-DD'));
-INSERT INTO Loans (LoanID, CustomerID, InterestRate, DueDate) VALUES (103, 3, 10, TO_DATE('2026-07-25', 'YYYY-MM-DD'));
-INSERT INTO Loans (LoanID, CustomerID, InterestRate, DueDate) VALUES (104, 4, 9, TO_DATE('2026-09-05', 'YYYY-MM-DD'));
+-- 2. Insert data
+INSERT INTO Customers VALUES (3, 'Priya', 70, 20000, 'FALSE');
+INSERT INTO Customers VALUES (1, 'Sanjai', 65, 15000, 'FALSE');
+INSERT INTO Customers VALUES (2, 'Rahul', 45, 8000, 'FALSE');
+INSERT INTO Customers VALUES (4, 'Kumar', 55, 12000, 'FALSE');
 
--- Insert account data
-INSERT INTO ACCOUNTS (ACCOUNTID, BALANCE) VALUES (1, 15000);
-INSERT INTO ACCOUNTS (ACCOUNTID, BALANCE) VALUES (2, 8000);
+INSERT INTO Loans VALUES (101, 1, 9, TO_DATE('2026-07-15', 'YYYY-MM-DD'));
+INSERT INTO Loans VALUES (102, 2, 12, TO_DATE('2026-08-20', 'YYYY-MM-DD'));
+INSERT INTO Loans VALUES (103, 3, 10, TO_DATE('2026-07-25', 'YYYY-MM-DD'));
+INSERT INTO Loans VALUES (104, 4, 9, TO_DATE('2026-09-05', 'YYYY-MM-DD'));
+
+INSERT INTO ACCOUNTS VALUES (1, 15000);
+INSERT INTO ACCOUNTS VALUES (2, 8000);
+
+INSERT INTO Employees VALUES (1, 'Alice', 50000);
+INSERT INTO Employees VALUES (2, 'Bob', 60000);
 
 COMMIT;
