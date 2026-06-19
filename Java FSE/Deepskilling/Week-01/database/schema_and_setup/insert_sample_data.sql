@@ -39,4 +39,9 @@ INSERT INTO Employees (EmployeeID, Name, Position, Salary, Department, HireDate)
 SELECT 1, 'Alice Johnson', 'Manager',   70000, 'HR', TO_DATE('2015-06-15', 'YYYY-MM-DD') FROM DUAL 
 WHERE NOT EXISTS (SELECT 1 FROM Employees WHERE EmployeeID = 1);
 
+-- Add a loan due in 25 days (within the 30-day window)
+INSERT INTO Loans (LoanID, CustomerID, LoanAmount, InterestRate, StartDate, EndDate)
+SELECT 3, 2, 8000, 5, SYSDATE, SYSDATE + 25
+FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM Loans WHERE LoanID = 3);
+
 COMMIT;

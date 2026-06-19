@@ -1,0 +1,3 @@
+SELECT LoanID, CustomerID, EndDate 
+FROM Loans 
+WHERE EndDate BETWEEN SYSDATE AND SYSDATE + 30;
