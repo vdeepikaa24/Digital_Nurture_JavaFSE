@@ -16,7 +16,8 @@ CREATE TABLE Customers (
     Name VARCHAR2(100),
     DOB DATE,
     Balance NUMBER,
-    LastModified DATE
+    LastModified DATE,
+    IsVIP VARCHAR2(5) DEFAULT 'FALSE'
 );
 
 CREATE TABLE Accounts (
