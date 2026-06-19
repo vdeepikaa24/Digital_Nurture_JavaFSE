@@ -1,4 +1,0 @@
--- Use this to see the data before and after
-SELECT CUSTOMERID, NAME, BALANCE, ISVIP 
-FROM CUSTOMERS 
-ORDER BY BALANCE DESC;
