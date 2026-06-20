@@ -15,6 +15,10 @@ INSERT INTO Employees (EmployeeID, Name, Position, Salary, Department, HireDate)
 SELECT 1, 'Alice Johnson', 'Manager', 70000, 'HR', TO_DATE('2015-06-15', 'YYYY-MM-DD') FROM DUAL 
 WHERE NOT EXISTS (SELECT 1 FROM Employees WHERE EmployeeID = 1);
 
+INSERT INTO Employees (EmployeeID, Name, Position, Salary, Department, HireDate)
+SELECT 2, 'Bob Smith', 'Developer', 80000, 'HR', TO_DATE('2018-01-10', 'YYYY-MM-DD') FROM DUAL 
+WHERE NOT EXISTS (SELECT 1 FROM Employees WHERE EmployeeID = 2);
+
 -- 2. Insert Children (Depend on Customers)
 INSERT INTO Accounts (AccountID, CustomerID, AccountType, Balance, LastModified)
 SELECT 1, 1, 'Savings', 1000, SYSDATE FROM DUAL 
