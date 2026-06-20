@@ -9,8 +9,8 @@ BEGIN
 END;
 /
 
--- 3. Check Updated Salaries
-SELECT 'AFTER' as STATUS, EmployeeID, Name, Department, Salary 
+-- 3. Check data AFTER
+SELECT 'AFTER UPDATE' as STATUS, EmployeeID, Department, Salary 
 FROM Employees 
 WHERE Department = 'HR';
 /
