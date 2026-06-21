@@ -54,3 +54,4 @@ INSERT INTO Transactions (TransactionID, AccountID, TransactionDate, Amount, Tra
 VALUES (999, 1, SYSDATE, 999, 'Test');
 
 COMMIT;
+/
