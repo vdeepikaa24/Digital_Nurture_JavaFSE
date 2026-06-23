@@ -35,6 +35,26 @@
             <version>6.0.11</version>
         </dependency>
 
+        <!-- Core Spring Web for @RestController / MockMvc slice support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>6.0.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>6.0.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>3.2.5</version>
+        </dependency>
+
+
         <!-- REST/MVC test support (MockMvc) -->
         <dependency>
             <groupId>org.springframework</groupId>
