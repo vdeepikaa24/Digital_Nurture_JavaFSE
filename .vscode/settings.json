@@ -1,3 +1,7 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.project.sourcePaths": [
+        "src/main/java/engineeringConcepts/Exercise_3_Testing_A_REST_Controller_with_MockMvc",
+        "src/test/java/junit/JUnit_Spring_Test_Exercises/Exercise_3_Testing_A_REST_Controller_with_MockMvc"
+    ]
 }
