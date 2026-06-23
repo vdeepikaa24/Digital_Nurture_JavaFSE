@@ -3,8 +3,6 @@ package junit.Mockito_Advanced_Exercises.Exercise_1_Mocking_Databases_And_Reposi
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import junit.Mockito_Advanced_Exercises.Repository;
-import junit.Mockito_Advanced_Exercises.Service;
 
 public class ServiceTest {
 

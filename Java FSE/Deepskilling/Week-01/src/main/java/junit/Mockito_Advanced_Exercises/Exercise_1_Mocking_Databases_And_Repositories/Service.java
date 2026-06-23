@@ -1,4 +1,4 @@
-package junit.Mockito_Advanced_Exercises;
+package junit.Mockito_Advanced_Exercises.Exercise_1_Mocking_Databases_And_Repositories;
 
 public class Service {
     private final Repository repository;
