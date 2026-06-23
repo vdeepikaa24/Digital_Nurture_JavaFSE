@@ -4,4 +4,6 @@ public interface ExternalApi {
     String getData();
     String getData(String input);
     void logAction(String message);
+    void authenticate();
+    void fetchData();
 }
