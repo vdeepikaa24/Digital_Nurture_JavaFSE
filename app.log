@@ -1,0 +1,10 @@
+13:50:30.290 [main] DEBUG j.S.E.Exercise_3_Using_Different_Appenders - Debug log: demonstrates the logger level with SLF4J.
+13:50:30.290 [main] INFO  j.S.E.Exercise_3_Using_Different_Appenders - Info log: both console and file appenders should receive this.
+13:50:30.290 [main] WARN  j.S.E.Exercise_3_Using_Different_Appenders - Warn log: useful for highlighting potential issues.
+13:50:30.290 [main] ERROR j.S.E.Exercise_3_Using_Different_Appenders - Error log: exception message = / by zero
+13:50:30.290 [main] INFO  j.S.E.Exercise_3_Using_Different_Appenders - Done. Check app.log for file output.
+13:53:33.529 [main] DEBUG j.S.E.Exercise_3_Using_Different_Appenders - Debug log: demonstrates the logger level with SLF4J.
+13:53:33.529 [main] INFO  j.S.E.Exercise_3_Using_Different_Appenders - Info log: both console and file appenders should receive this.
+13:53:33.529 [main] WARN  j.S.E.Exercise_3_Using_Different_Appenders - Warn log: useful for highlighting potential issues.
+13:53:33.529 [main] ERROR j.S.E.Exercise_3_Using_Different_Appenders - Error log: exception message = / by zero
+13:53:33.529 [main] INFO  j.S.E.Exercise_3_Using_Different_Appenders - Done. Check app.log for file output.
