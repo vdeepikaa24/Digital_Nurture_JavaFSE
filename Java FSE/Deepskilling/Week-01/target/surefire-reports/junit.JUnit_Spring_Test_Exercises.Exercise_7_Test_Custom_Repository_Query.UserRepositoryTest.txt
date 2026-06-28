@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: junit.JUnit_Spring_Test_Exercises.Exercise_7_Test_Custom_Repository_Query.UserRepositoryTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.297 s -- in junit.JUnit_Spring_Test_Exercises.Exercise_7_Test_Custom_Repository_Query.UserRepositoryTest

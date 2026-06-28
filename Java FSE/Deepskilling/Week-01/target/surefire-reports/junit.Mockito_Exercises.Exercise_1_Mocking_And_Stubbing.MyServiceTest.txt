@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: junit.Mockito_Exercises.Exercise_1_Mocking_And_Stubbing.MyServiceTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in junit.Mockito_Exercises.Exercise_1_Mocking_And_Stubbing.MyServiceTest

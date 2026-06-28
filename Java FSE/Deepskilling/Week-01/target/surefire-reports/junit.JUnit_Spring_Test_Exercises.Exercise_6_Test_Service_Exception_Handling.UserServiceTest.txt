@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: junit.JUnit_Spring_Test_Exercises.Exercise_6_Test_Service_Exception_Handling.UserServiceTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.540 s -- in junit.JUnit_Spring_Test_Exercises.Exercise_6_Test_Service_Exception_Handling.UserServiceTest

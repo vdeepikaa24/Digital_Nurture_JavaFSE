@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: junit.Mocking_Dependencies_In_Spring_Tests_Using_Mockito.Exercise_2_Mocking_A_Repository_In_A_Service_Test.UserServiceTest
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.078 s -- in junit.Mocking_Dependencies_In_Spring_Tests_Using_Mockito.Exercise_2_Mocking_A_Repository_In_A_Service_Test.UserServiceTest

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: junit.JUnit_Spring_Test_Exercises.Exercise_8_Test_Controller_Exception_Handling.GlobalExceptionHandlerTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.200 s -- in junit.JUnit_Spring_Test_Exercises.Exercise_8_Test_Controller_Exception_Handling.GlobalExceptionHandlerTest

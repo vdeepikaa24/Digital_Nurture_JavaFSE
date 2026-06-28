@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: junit.Mockito_Exercises.Exercise_5_Mocking_And_Stubbing_With_Multiple_Returns.MultipleReturnsTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in junit.Mockito_Exercises.Exercise_5_Mocking_And_Stubbing_With_Multiple_Returns.MultipleReturnsTest
