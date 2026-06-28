@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: junit.JUnit_Spring_Test_Exercises.Exercise_4_Integration_Test_With_SpringBoot.UserControllerIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in junit.JUnit_Spring_Test_Exercises.Exercise_4_Integration_Test_With_SpringBoot.UserControllerIntegrationTest

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: junit.Mocking_Dependencies_In_Spring_Tests_Using_Mockito.Exercise_3_Mocking_A_Service_Dependency_In_An_Integration_Test.UserIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.705 s -- in junit.Mocking_Dependencies_In_Spring_Tests_Using_Mockito.Exercise_3_Mocking_A_Service_Dependency_In_An_Integration_Test.UserIntegrationTest
