@@ -5,11 +5,11 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="bookRepository"
-          class="springcore_maven.exercise_1_configuring_a_basic_spring_application.com.library.repository.BookRepository"/>
+          class="springcore_maven.exercise_2_implementing_dependency_injection.com.library.repository.BookRepository" />
 
     <bean id="bookService"
-          class="springcore_maven.exercise_1_configuring_a_basic_spring_application.com.library.service.BookService">
-        <property name="bookRepository" ref="bookRepository"/>
+          class="springcore_maven.exercise_2_implementing_dependency_injection.com.library.service.BookService">
+        <property name="bookRepository" ref="bookRepository" />
     </bean>
 
 </beans>
