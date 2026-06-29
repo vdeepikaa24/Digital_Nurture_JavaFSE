@@ -3,15 +3,18 @@ package com.library.aspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 @Aspect
+@Component
 public class LoggingAspect {
 
     @Around("execution(* com.library.service.BookService.*(..))")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long startTime = System.currentTimeMillis();
 
-        Object proceed = joinPoint.proceed(); // Executes the actual method
+        // Executes the actual method being intercepted
+        Object proceed = joinPoint.proceed();
 
         long endTime = System.currentTimeMillis();
         System.out.println("Log: " + joinPoint.getSignature() + " executed in " + (endTime - startTime) + "ms");
