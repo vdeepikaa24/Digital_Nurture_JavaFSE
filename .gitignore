@@ -1,0 +1,28 @@
+# --- Maven ---
+target/
+**/target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# --- IntelliJ IDEA ---
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# --- Compiled Class Files ---
+*.class
+
+# --- Logs ---
+*.log
+
+# --- OS Junk ---
+.DS_Store
+Thumbs.db
+
+# --- Archive Files ---
+*.zip
+*.tar
+*.jar
+*.war
