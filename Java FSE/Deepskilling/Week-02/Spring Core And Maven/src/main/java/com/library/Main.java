@@ -7,11 +7,15 @@ public class Main {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        // Retrieve by class type (cleaner and safer)
-        BookService service = context.getBean(BookService.class);
+        // Verify Constructor Injection
+        System.out.println("--- Testing Constructor Injection ---");
+        BookService serviceC = context.getBean("bookServiceConstructor", BookService.class);
+        serviceC.executeLibraryTasks();
 
-        // Execute task
-        service.executeLibraryTasks();
+        // Verify Setter Injection
+        System.out.println("\n--- Testing Setter Injection ---");
+        BookService serviceS = context.getBean("bookServiceSetter", BookService.class);
+        serviceS.executeLibraryTasks();
 
         context.close();
     }
