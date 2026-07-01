@@ -2,10 +2,14 @@ package com.cognizant.orm_learn_2;
 
 import com.cognizant.orm_learn_2.repository.CountryRepository;
 import com.cognizant.orm_learn_2.repository.StockRepository;
+import com.cognizant.orm_learn_2.repository.EmployeeRepository;
+import com.cognizant.orm_learn_2.repository.DepartmentRepository;
+import com.cognizant.orm_learn_2.repository.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,6 +21,15 @@ public class OrmLearn2Application implements CommandLineRunner {
 
     @Autowired
     private StockRepository stockRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
+
+    @Autowired
+    private SkillRepository skillRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(OrmLearn2Application.class, args);
@@ -48,5 +61,10 @@ public class OrmLearn2Application implements CommandLineRunner {
 
         System.out.println("--- Lowest 3 Netflix Stocks ---");
         stockRepository.findTop3ByCodeOrderByCloseAsc("NFLX").forEach(System.out::println);
+
+        System.out.println("--- Payroll Module Ready ---");
+        System.out.println("Employee count: " + employeeRepository.count());
+        System.out.println("Department count: " + departmentRepository.count());
+        System.out.println("Skill count: " + skillRepository.count());
     }
 }
