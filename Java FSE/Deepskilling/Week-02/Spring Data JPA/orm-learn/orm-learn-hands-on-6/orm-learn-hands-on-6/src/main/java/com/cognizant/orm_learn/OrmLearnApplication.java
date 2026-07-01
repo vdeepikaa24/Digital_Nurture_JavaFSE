@@ -19,30 +19,34 @@ public class OrmLearnApplication {
         ApplicationContext context = SpringApplication.run(OrmLearnApplication.class, args);
         countryService = context.getBean(CountryService.class);
         
-        // Call the new test method
-        testAddCountry();
+        // Call the update test
+        testUpdateCountry();
     }
 
-    private static void testAddCountry() {
-        LOGGER.info("Start testAddCountry");
-        
-        // 1. Create new instance
-        Country newCountry = new Country();
-        newCountry.setCode("AL");
-        newCountry.setName("Albania");
+    private static void testUpdateCountry() {
+        LOGGER.info("Start testUpdateCountry");
         
         try {
-            // 2. Call service to add
-            countryService.addCountry(newCountry);
+            // Update Albania (AL) to a new name
+            countryService.updateCountry("AL", "Albania Updated");
             
-            // 3. Find and verify
-            Country foundCountry = countryService.findCountryByCode("AL");
-            LOGGER.debug("Country: {}", foundCountry);
-            
+            // Verify by fetching again
+            Country country = countryService.findCountryByCode("AL");
+            LOGGER.debug("Updated Country: {}", country);
         } catch (CountryNotFoundException e) {
             LOGGER.error("Country not found: {}", e.getMessage());
         }
         
+        LOGGER.info("End testUpdateCountry");
+    }
+
+    // You can keep testAddCountry here to use whenever you need to add a fresh record
+    private static void testAddCountry() {
+        LOGGER.info("Start testAddCountry");
+        Country newCountry = new Country();
+        newCountry.setCode("AL");
+        newCountry.setName("Albania");
+        countryService.addCountry(newCountry);
         LOGGER.info("End testAddCountry");
     }
 }
