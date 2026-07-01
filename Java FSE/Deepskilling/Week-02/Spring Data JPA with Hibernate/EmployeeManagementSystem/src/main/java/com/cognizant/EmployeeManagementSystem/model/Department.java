@@ -1,14 +1,17 @@
 package com.cognizant.EmployeeManagementSystem.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "department")
 @Data
-public class Department extends Auditable { // Added "extends Auditable"
+@EqualsAndHashCode(callSuper = true) // Required when extending another class
+@NoArgsConstructor
+@AllArgsConstructor
+public class Department extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
