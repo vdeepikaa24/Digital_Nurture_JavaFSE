@@ -1,24 +1,33 @@
 package com.cognizant.EmployeeManagementSystem.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 
 @Entity
-@Table(name = "employee")
-@Data
+@NamedQueries({
+    @NamedQuery(name = "Employee.findAllEmployees", query = "SELECT e FROM Employee e"),
+    @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = ?1")
+})
 public class Employee {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String email;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
-    // Use JsonIgnoreProperties to avoid circularity while still keeping the department info
-    @JsonIgnoreProperties("employees") 
     private Department department;
+
+    // Default constructor, getters, and setters
+    public Employee() {}
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public Department getDepartment() { return department; }
+    public void setDepartment(Department department) { this.department = department; }
 }
