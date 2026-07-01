@@ -3,13 +3,12 @@ package com.cognizant.EmployeeManagementSystem.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "department")
 @Data
-public class Department {
+public class Department extends Auditable { // Added "extends Auditable"
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

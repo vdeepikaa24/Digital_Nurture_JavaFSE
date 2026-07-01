@@ -2,13 +2,14 @@ package com.cognizant.EmployeeManagementSystem.model;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Employee.findAllEmployees", query = "SELECT e FROM Employee e"),
     @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = ?1")
 })
-public class Employee {
+// Corrected: Extend Auditable here
+public class Employee extends Auditable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,9 +20,12 @@ public class Employee {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    // Default constructor, getters, and setters
-    public Employee() {}
+    // Corrected: Default constructor
+    public Employee() {
+        super();
+    }
 
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }
