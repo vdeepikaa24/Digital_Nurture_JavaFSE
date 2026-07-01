@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import jakarta.persistence.EntityManager;
+import java.util.List;
 
 @Service
 public class EmployeeService {
@@ -17,6 +20,9 @@ public class EmployeeService {
 
     @Autowired
     private DepartmentRepository departmentRepository;
+
+    @Autowired
+    private EntityManager entityManager;
 
     public Page<Employee> getAllEmployees(Pageable pageable) {
         return employeeRepository.findAll(pageable);
@@ -36,6 +42,21 @@ public class EmployeeService {
             }
         }
         return employeeRepository.save(employee);
+    }
+
+    @Transactional
+    public void saveAllEmployees(List<Employee> employees) {
+        int batchSize = 50; 
+        for (int i = 0; i < employees.size(); i++) {
+            entityManager.persist(employees.get(i));
+            
+            if (i > 0 && i % batchSize == 0) {
+                entityManager.flush();
+                entityManager.clear();
+            }
+        }
+        entityManager.flush();
+        entityManager.clear();
     }
 
     public void deleteEmployee(Long id) {
