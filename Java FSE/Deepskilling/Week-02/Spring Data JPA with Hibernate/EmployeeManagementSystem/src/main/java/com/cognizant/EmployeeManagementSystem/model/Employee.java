@@ -2,6 +2,7 @@ package com.cognizant.EmployeeManagementSystem.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "employee")
@@ -12,14 +13,12 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "email")
     private String email;
 
-    // Many Employees belong to one Department
     @ManyToOne
     @JoinColumn(name = "department_id")
+    // Use JsonIgnoreProperties to avoid circularity while still keeping the department info
+    @JsonIgnoreProperties("employees") 
     private Department department;
 }
