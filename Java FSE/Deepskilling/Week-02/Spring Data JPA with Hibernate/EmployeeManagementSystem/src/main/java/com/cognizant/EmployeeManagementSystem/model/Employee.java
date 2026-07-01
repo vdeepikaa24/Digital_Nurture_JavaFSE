@@ -1,7 +1,7 @@
 package com.cognizant.EmployeeManagementSystem.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+
 
 @Entity
 @NamedQueries({

@@ -5,8 +5,9 @@ import com.cognizant.EmployeeManagementSystem.model.Department;
 import com.cognizant.EmployeeManagementSystem.repository.EmployeeRepository;
 import com.cognizant.EmployeeManagementSystem.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class EmployeeService {
@@ -17,21 +18,25 @@ public class EmployeeService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    public Page<Employee> getAllEmployees(Pageable pageable) {
+        return employeeRepository.findAll(pageable);
+    }
+
+    public Page<Employee> getEmployeesByDepartment(String deptName, Pageable pageable) {
+        return employeeRepository.findByDepartmentName(deptName, pageable);
     }
 
     public Employee saveEmployee(Employee employee) {
-    if (employee.getDepartment() != null && employee.getDepartment().getId() != null) {
-        Department dept = departmentRepository.findById(employee.getDepartment().getId())
-            .orElse(null); 
-        
-        if (dept != null) {
-            employee.setDepartment(dept);
+        if (employee.getDepartment() != null && employee.getDepartment().getId() != null) {
+            Department dept = departmentRepository.findById(employee.getDepartment().getId())
+                .orElse(null); 
+            
+            if (dept != null) {
+                employee.setDepartment(dept);
+            }
         }
+        return employeeRepository.save(employee);
     }
-    return employeeRepository.save(employee);
-}
 
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
