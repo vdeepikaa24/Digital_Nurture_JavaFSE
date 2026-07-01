@@ -1,7 +1,8 @@
 package com.cognizant.orm_learn.service;
 
 import java.util.Optional;
-import org.springframework.transaction.annotation.Transactional;import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cognizant.orm_learn.model.Country;
@@ -21,5 +22,10 @@ public class CountryService {
             throw new CountryNotFoundException("Country not found");
         }
         return result.get();
+    }
+
+    @Transactional
+    public void addCountry(Country country) {
+        countryRepository.save(country);
     }
 }

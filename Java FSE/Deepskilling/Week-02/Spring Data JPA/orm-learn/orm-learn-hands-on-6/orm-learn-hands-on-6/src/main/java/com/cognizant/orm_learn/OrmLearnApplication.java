@@ -19,17 +19,30 @@ public class OrmLearnApplication {
         ApplicationContext context = SpringApplication.run(OrmLearnApplication.class, args);
         countryService = context.getBean(CountryService.class);
         
-        testFindCountryByCode();
+        // Call the new test method
+        testAddCountry();
     }
 
-    private static void testFindCountryByCode() {
-        LOGGER.info("Start");
+    private static void testAddCountry() {
+        LOGGER.info("Start testAddCountry");
+        
+        // 1. Create new instance
+        Country newCountry = new Country();
+        newCountry.setCode("AL");
+        newCountry.setName("Albania");
+        
         try {
-            Country country = countryService.findCountryByCode("IN");
-            LOGGER.debug("Country:{}", country);
+            // 2. Call service to add
+            countryService.addCountry(newCountry);
+            
+            // 3. Find and verify
+            Country foundCountry = countryService.findCountryByCode("AL");
+            LOGGER.debug("Country: {}", foundCountry);
+            
         } catch (CountryNotFoundException e) {
-            LOGGER.error(e.getMessage());
+            LOGGER.error("Country not found: {}", e.getMessage());
         }
-        LOGGER.info("End");
+        
+        LOGGER.info("End testAddCountry");
     }
 }
