@@ -25,17 +25,15 @@ public class OrmLearn2Application implements CommandLineRunner {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(OrmLearn2Application.class, args);
         
-  
         employeeService = context.getBean(EmployeeService.class);
         departmentService = context.getBean(DepartmentService.class);
         skillService = context.getBean(SkillService.class);
 
-        testGetEmployee();
+        testGetDepartment();
     }
 
     @Override
     public void run(String... args) throws Exception {
-        
     }
 
     private static void testGetEmployee() {
@@ -46,6 +44,14 @@ public class OrmLearn2Application implements CommandLineRunner {
         LOGGER.info("End");
     }
 
+    private static void testGetDepartment() {
+        LOGGER.info("Start");
+        Department department = departmentService.get(1); 
+        LOGGER.debug("Department:{}", department);
+        LOGGER.debug("Employees:{}", department.getEmployeeList());
+        LOGGER.info("End");
+    }
+    
     private static void testAddEmployee() {
         Employee employee = new Employee();
         employee.setName("John Doe");
