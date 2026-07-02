@@ -1,70 +1,62 @@
 package com.cognizant.orm_learn_2;
 
-import com.cognizant.orm_learn_2.repository.CountryRepository;
-import com.cognizant.orm_learn_2.repository.StockRepository;
-import com.cognizant.orm_learn_2.repository.EmployeeRepository;
-import com.cognizant.orm_learn_2.repository.DepartmentRepository;
-import com.cognizant.orm_learn_2.repository.SkillRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.springframework.context.ApplicationContext;
+import com.cognizant.orm_learn_2.model.Department;
+import com.cognizant.orm_learn_2.model.Employee;
+import com.cognizant.orm_learn_2.service.DepartmentService;
+import com.cognizant.orm_learn_2.service.EmployeeService;
+import com.cognizant.orm_learn_2.service.SkillService;
 
 @SpringBootApplication
 public class OrmLearn2Application implements CommandLineRunner {
 
-    @Autowired
-    private CountryRepository countryRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrmLearn2Application.class);
 
-    @Autowired
-    private StockRepository stockRepository;
-
-    @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private DepartmentRepository departmentRepository;
-
-    @Autowired
-    private SkillRepository skillRepository;
+    private static EmployeeService employeeService;
+    private static DepartmentService departmentService;
+    private static SkillService skillService;
 
     public static void main(String[] args) {
-        SpringApplication.run(OrmLearn2Application.class, args);
+        ApplicationContext context = SpringApplication.run(OrmLearn2Application.class, args);
+        
+  
+        employeeService = context.getBean(EmployeeService.class);
+        departmentService = context.getBean(DepartmentService.class);
+        skillService = context.getBean(SkillService.class);
+
+        testGetEmployee();
     }
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("--- All matching 'ou' ---");
-        countryRepository.findByNameContaining("ou").forEach(System.out::println);
+        
+    }
 
-        System.out.println("--- Sorted 'ou' ---");
-        countryRepository.findByNameContainingOrderByNameAsc("ou").forEach(System.out::println);
+    private static void testGetEmployee() {
+        LOGGER.info("Start");
+        Employee employee = employeeService.get(1);
+        LOGGER.debug("Employee:{}", employee);
+        LOGGER.debug("Department:{}", employee.getDepartment());
+        LOGGER.info("End");
+    }
 
-        System.out.println("--- Starts with 'Z' ---");
-        countryRepository.findByNameStartingWith("Z").forEach(System.out::println);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date startDate = sdf.parse("2019-09-01");
-        Date endDate = sdf.parse("2019-09-30");
-
-        System.out.println("--- Facebook Stocks Sept 2019 ---");
-        stockRepository.findByCodeAndDateBetween("FB", startDate, endDate).forEach(System.out::println);
-
-        System.out.println("--- Google Stocks > 1250 ---");
-        stockRepository.findByCodeAndCloseGreaterThan("GOOGL", 1250.0).forEach(System.out::println);
-
-        System.out.println("--- Top 3 Highest Volume ---");
-        stockRepository.findTop3ByOrderByVolumeDesc().forEach(System.out::println);
-
-        System.out.println("--- Lowest 3 Netflix Stocks ---");
-        stockRepository.findTop3ByCodeOrderByCloseAsc("NFLX").forEach(System.out::println);
-
-        System.out.println("--- Payroll Module Ready ---");
-        System.out.println("Employee count: " + employeeRepository.count());
-        System.out.println("Department count: " + departmentRepository.count());
-        System.out.println("Skill count: " + skillRepository.count());
+    private static void testAddEmployee() {
+        Employee employee = new Employee();
+        employee.setName("John Doe");
+        employee.setSalary(50000.0);
+        employee.setPermanent(true);
+        employee.setDateOfBirth(new Date());
+        
+        Department department = departmentService.get(1);
+        employee.setDepartment(department);
+        
+        employeeService.save(employee);
+        LOGGER.debug("Employee:{}", employee);
     }
 }

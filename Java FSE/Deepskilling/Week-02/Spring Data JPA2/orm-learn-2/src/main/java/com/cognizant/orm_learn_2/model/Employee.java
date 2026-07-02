@@ -25,9 +25,15 @@ public class Employee {
     @Column(name = "em_date_of_birth")
     private Date dateOfBirth;
 
+    // Many-to-One Relationship
+    @ManyToOne
+    @JoinColumn(name = "em_dp_id")
+    private Department department;
+
     public Employee() {
     }
 
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -68,9 +74,18 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     @Override
     public String toString() {
         return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + 
-               ", permanent=" + permanent + ", dateOfBirth=" + dateOfBirth + "]";
+               ", permanent=" + permanent + ", dateOfBirth=" + dateOfBirth + 
+               ", department=" + department + "]";
     }
 }
