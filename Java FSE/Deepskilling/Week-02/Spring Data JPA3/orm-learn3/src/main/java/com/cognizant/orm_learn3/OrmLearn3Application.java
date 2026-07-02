@@ -26,7 +26,14 @@ public class OrmLearn3Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         testGetAllPermanentEmployees();
+        testGetAverageSalary();
         testGetAttemptDetails();
+    }
+
+    private void testGetAverageSalary() {
+        int departmentId = 1;
+        double averageSalary = employeeService.getAverageSalary(departmentId);
+        LOGGER.info("Average salary for department {}: {}", departmentId, averageSalary);
     }
 
     private void testGetAttemptDetails() {
