@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import com.cognizant.orm_learn_2.model.Department;
 import com.cognizant.orm_learn_2.model.Employee;
+import com.cognizant.orm_learn_2.model.Skill;
 import com.cognizant.orm_learn_2.service.DepartmentService;
 import com.cognizant.orm_learn_2.service.EmployeeService;
 import com.cognizant.orm_learn_2.service.SkillService;
@@ -29,7 +30,7 @@ public class OrmLearn2Application implements CommandLineRunner {
         departmentService = context.getBean(DepartmentService.class);
         skillService = context.getBean(SkillService.class);
 
-        testGetDepartment();
+        testAddSkillToEmployee();
     }
 
     @Override
@@ -41,6 +42,7 @@ public class OrmLearn2Application implements CommandLineRunner {
         Employee employee = employeeService.get(1);
         LOGGER.debug("Employee:{}", employee);
         LOGGER.debug("Department:{}", employee.getDepartment());
+        LOGGER.debug("Skills:{}", employee.getSkillList());
         LOGGER.info("End");
     }
 
@@ -52,6 +54,19 @@ public class OrmLearn2Application implements CommandLineRunner {
         LOGGER.info("End");
     }
     
+    private static void testAddSkillToEmployee() {
+        LOGGER.info("Start");
+        Employee employee = employeeService.get(1);
+        Skill skill = skillService.get(1);
+
+        employee.getSkillList().add(skill);
+
+        employeeService.save(employee);
+        
+        LOGGER.debug("Skill added to employee:{}", employee);
+        LOGGER.info("End");
+    }
+
     private static void testAddEmployee() {
         Employee employee = new Employee();
         employee.setName("John Doe");
