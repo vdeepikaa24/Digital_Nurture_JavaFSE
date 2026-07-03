@@ -40,17 +40,19 @@ public class SpringLearnApplication {
     }
 
     public static void displayCountry() {
-        LOGGER.info("START");
+    LOGGER.info("START");
+    try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("country.xml")) {
+        Country country = context.getBean("country", Country.class);
+        Country anotherCountry = context.getBean("country", Country.class);
         
-        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("country.xml")) {
-            Country country = context.getBean("country", Country.class);
-            
-            LOGGER.debug("Country : {}", country.toString());
-            
-        } catch (Exception e) {
-            LOGGER.error("Error retrieving country bean", e);
-        }
+        LOGGER.debug("Country : {}", country.toString());
+        LOGGER.debug("Another Country : {}", anotherCountry.toString());
         
-        LOGGER.info("END");
+        LOGGER.debug("Are they the same instance? {}", (country == anotherCountry));
+        
+    } catch (Exception e) {
+        LOGGER.error("Error retrieving country bean", e);
     }
+    LOGGER.info("END");
+}
 }
