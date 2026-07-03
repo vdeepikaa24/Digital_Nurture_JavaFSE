@@ -16,7 +16,10 @@ public class SpringLearnApplication {
     public static void main(String[] args) {
         LOGGER.info("START");
         SpringApplication.run(SpringLearnApplication.class, args);
+        
         displayDate();
+        displayCountry();
+        
         LOGGER.info("END");
     }
 
@@ -31,6 +34,21 @@ public class SpringLearnApplication {
             
         } catch (Exception e) {
             LOGGER.error("Error parsing date", e);
+        }
+        
+        LOGGER.info("END");
+    }
+
+    public static void displayCountry() {
+        LOGGER.info("START");
+        
+        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("country.xml")) {
+            Country country = context.getBean("country", Country.class);
+            
+            LOGGER.debug("Country : {}", country.toString());
+            
+        } catch (Exception e) {
+            LOGGER.error("Error retrieving country bean", e);
         }
         
         LOGGER.info("END");
