@@ -1,5 +1,7 @@
 package com.cognizant.spring_learn.controller;
 
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,9 +11,17 @@ import com.cognizant.spring_learn.model.Country;
 @RestController
 public class CountryController {
 
+   
+    private final ApplicationContext context = new ClassPathXmlApplicationContext("country.xml");
+
     @RequestMapping("/country")
     public Country getCountryIndia() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("country.xml");
         return (Country) context.getBean("in");
+    }
+
+    @GetMapping("/countries")
+    @SuppressWarnings("unchecked") 
+    public List<Country> getAllCountries() {
+        return (List<Country>) context.getBean("countryList");
     }
 }
