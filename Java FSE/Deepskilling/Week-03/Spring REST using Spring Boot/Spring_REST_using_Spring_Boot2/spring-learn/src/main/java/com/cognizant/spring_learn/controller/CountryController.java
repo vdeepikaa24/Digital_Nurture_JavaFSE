@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cognizant.spring_learn.model.Country;
+import com.cognizant.spring_learn.service.exception.CountryNotFoundException;
 
 @RestController
 public class CountryController {
@@ -26,13 +27,18 @@ public class CountryController {
     }
 
     @GetMapping("/countries/{code}")
-    @SuppressWarnings("unchecked")
-    public Country getCountry(@PathVariable String code) {
-        List<Country> countryList = (List<Country>) context.getBean("countryList");
-        
-        return countryList.stream()
-                .filter(c -> c.getCode().equalsIgnoreCase(code))
-                .findFirst()
-                .orElse(null);
+@SuppressWarnings("unchecked")
+public Country getCountry(@PathVariable String code) throws CountryNotFoundException {
+    List<Country> countryList = (List<Country>) context.getBean("countryList");
+    
+    Country country = countryList.stream()
+            .filter(c -> c.getCode().equalsIgnoreCase(code))
+            .findFirst()
+            .orElse(null);
+            
+    if (country == null) {
+        throw new CountryNotFoundException();
     }
+    return country;
+}
 }
