@@ -25,6 +25,18 @@
         <property name="name" value="Operations"/>
     </bean>
 
+    <bean id="departmentList" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="dept1"/>
+                <ref bean="dept2"/>
+                <ref bean="dept3"/>
+                <ref bean="dept4"/>
+                <ref bean="dept5"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
     <!-- Employees -->
     <bean id="emp1" class="com.cognizant.skill_spring.model.Employee">
         <property name="id" value="1"/>
