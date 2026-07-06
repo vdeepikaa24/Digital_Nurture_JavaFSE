@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    
+    <bean id="emp1" class="com.cognizant.model.Employee">
+        <property name="id" value="1"/>
+        <property name="name" value="Deepikaa"/>
+        <property name="department" value="IT"/>
+    </bean>
+
+    <bean id="employeeList" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="emp1"/>
+                <!-- Add more beans here as needed -->
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>

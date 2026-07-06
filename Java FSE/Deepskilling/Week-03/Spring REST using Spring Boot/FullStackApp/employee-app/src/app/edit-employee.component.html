@@ -1,0 +1,27 @@
+<div *ngIf="employee; else loading">
+  <h2>Edit Employee: {{ employeeName }}</h2>
+  
+  <form (ngSubmit)="saveEmployee()">
+    <div>
+      <label for="id">Employee ID</label>
+      <input id="id" [value]="employee.id" disabled />
+    </div>
+
+    <div>
+      <label for="name">Name</label>
+      <input id="name" [(ngModel)]="employeeName" name="employeeName" required />
+    </div>
+
+    <div>
+      <label for="department">Department</label>
+      <input id="department" [(ngModel)]="departmentName" name="departmentName" required />
+    </div>
+
+    <button type="submit">Save</button>
+    <a routerLink="/employees">Back to list</a>
+  </form>
+</div>
+
+<ng-template #loading>
+  <p>Loading employee data...</p>
+</ng-template>
