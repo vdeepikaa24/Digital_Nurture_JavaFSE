@@ -1,42 +1,88 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
-       http://www.springframework.org/schema/beans/spring-beans.xsd">
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- Define Department beans -->
+    <!-- Departments -->
     <bean id="dept1" class="com.cognizant.skill_spring.model.Department">
         <property name="id" value="1"/>
-        <property name="name" value="IT"/>
+        <property name="name" value="Engineering"/>
     </bean>
     <bean id="dept2" class="com.cognizant.skill_spring.model.Department">
         <property name="id" value="2"/>
-        <property name="name" value="HR"/>
+        <property name="name" value="Human Resources"/>
+    </bean>
+    <bean id="dept3" class="com.cognizant.skill_spring.model.Department">
+        <property name="id" value="3"/>
+        <property name="name" value="Finance"/>
+    </bean>
+    <bean id="dept4" class="com.cognizant.skill_spring.model.Department">
+        <property name="id" value="4"/>
+        <property name="name" value="Marketing"/>
+    </bean>
+    <bean id="dept5" class="com.cognizant.skill_spring.model.Department">
+        <property name="id" value="5"/>
+        <property name="name" value="Operations"/>
     </bean>
 
-    <!-- Define Employee instances using ref to link to Department beans -->
+    <!-- Employees -->
     <bean id="emp1" class="com.cognizant.skill_spring.model.Employee">
         <property name="id" value="1"/>
-        <property name="name" value="Deepikaa"/>
+        <property name="name" value="John Doe"/>
         <property name="department" ref="dept1"/>
+        <property name="skills" value="Java, Angular"/>
     </bean>
     <bean id="emp2" class="com.cognizant.skill_spring.model.Employee">
         <property name="id" value="2"/>
-        <property name="name" value="Dharshini"/>
+        <property name="name" value="Jane Smith"/>
         <property name="department" ref="dept2"/>
+        <property name="skills" value="Java, Angular"/>
     </bean>
     <bean id="emp3" class="com.cognizant.skill_spring.model.Employee">
         <property name="id" value="3"/>
-        <property name="name" value="Dhaarani"/>
+        <property name="name" value="Robert Brown"/>
         <property name="department" ref="dept1"/>
+        <property name="skills" value="Python, SQL"/>
     </bean>
     <bean id="emp4" class="com.cognizant.skill_spring.model.Employee">
         <property name="id" value="4"/>
-        <property name="name" value="Dhivyadharshini"/>
-        <property name="department" ref="dept2"/>
+        <property name="name" value="Emily Davis"/>
+        <property name="department" ref="dept3"/>
+        <property name="skills" value="Python, SQL"/>
+    </bean>
+    <bean id="emp5" class="com.cognizant.skill_spring.model.Employee">
+        <property name="id" value="5"/>
+        <property name="name" value="Michael Wilson"/>
+        <property name="department" ref="dept1"/>
+        <property name="skills" value="Java, Angular"/>
     </bean>
 
-    <!-- Define Employee List -->
+    <bean id="emp6" class="com.cognizant.skill_spring.model.Employee">
+        <property name="id" value="6"/>
+        <property name="name" value="Sophia Martinez"/>
+        <property name="department" ref="dept4"/>
+        <property name="skills" value="Java, Angular"/>
+    </bean>
+    <bean id="emp7" class="com.cognizant.skill_spring.model.Employee">
+        <property name="id" value="7"/>
+        <property name="name" value="William Taylor"/>
+        <property name="department" ref="dept5"/>
+        <property name="skills" value="Python, SQL"/>
+    </bean>
+    <bean id="emp8" class="com.cognizant.skill_spring.model.Employee">
+        <property name="id" value="8"/>
+        <property name="name" value="Olivia Anderson"/>
+        <property name="department" ref="dept4"/>
+        <property name="skills" value="Python, SQL"/>
+    </bean>
+    <bean id="emp9" class="com.cognizant.skill_spring.model.Employee">
+        <property name="id" value="9"/>
+        <property name="name" value="James Thomas"/>
+        <property name="department" ref="dept5"/>
+        <property name="skills" value="Java, Angular"/>
+    </bean>
+
+    <!-- ArrayList of Employees -->
     <bean id="employeeList" class="java.util.ArrayList">
         <constructor-arg>
             <list>
@@ -44,18 +90,12 @@
                 <ref bean="emp2"/>
                 <ref bean="emp3"/>
                 <ref bean="emp4"/>
+                <ref bean="emp5"/>
+                <ref bean="emp6"/>
+                <ref bean="emp7"/>
+                <ref bean="emp8"/>
+                <ref bean="emp9"/>
             </list>
         </constructor-arg>
     </bean>
-
-    <!-- Define Department List -->
-    <bean id="departmentList" class="java.util.ArrayList">
-        <constructor-arg>
-            <list>
-                <ref bean="dept1"/>
-                <ref bean="dept2"/>
-            </list>
-        </constructor-arg>
-    </bean>
-
 </beans>

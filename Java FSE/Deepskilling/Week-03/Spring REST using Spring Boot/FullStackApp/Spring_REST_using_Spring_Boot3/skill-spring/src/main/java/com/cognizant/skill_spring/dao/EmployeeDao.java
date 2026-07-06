@@ -1,22 +1,25 @@
 package com.cognizant.skill_spring.dao;
 
 import com.cognizant.skill_spring.model.Employee;
+import java.util.ArrayList;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
-import org.springframework.beans.factory.annotation.Autowired; 
-import org.springframework.beans.factory.annotation.Qualifier; 
-import java.util.List;
 
 @Repository
 public class EmployeeDao {
-    
-    private static List<Employee> EMPLOYEE_LIST;
 
-    @Autowired
-    public EmployeeDao(@Qualifier("employeeList") List<Employee> employeeList) {
-        EMPLOYEE_LIST = employeeList;
+    private static ArrayList<Employee> EMPLOYEE_LIST;
+
+    public EmployeeDao() {
+        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("employee.xml")) {
+            @SuppressWarnings("unchecked")
+            ArrayList<Employee> list = (ArrayList<Employee>) context.getBean("employeeList");
+            EMPLOYEE_LIST = list;
+        }
     }
 
-    public List<Employee> getAllEmployees() {
+    public ArrayList<Employee> getAllEmployees() {
         return EMPLOYEE_LIST;
     }
 }
+

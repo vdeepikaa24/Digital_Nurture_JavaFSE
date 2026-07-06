@@ -4,6 +4,7 @@ public class Employee {
     private int id;
     private String name;
     private Department department; 
+    private String skills;
 
     public Employee() {
         super();
@@ -31,5 +32,13 @@ public class Employee {
     
     public void setDepartment(Department department) { 
         this.department = department; 
+    }
+
+    public String getSkills() {
+        return skills;
+    }
+
+    public void setSkills(String skills) {
+        this.skills = skills;
     }
 }

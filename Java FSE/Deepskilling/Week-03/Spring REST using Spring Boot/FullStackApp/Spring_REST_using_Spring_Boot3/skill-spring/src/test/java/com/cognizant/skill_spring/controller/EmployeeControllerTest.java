@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -22,19 +23,20 @@ class EmployeeControllerTest {
     void shouldReturnEmployeesFromXmlConfiguration() throws Exception {
         mockMvc.perform(get("/employees"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].name").value("Deepikaa"))
-                .andExpect(jsonPath("$[0].department").value("IT"));
+                .andExpect(jsonPath("$", hasSize(9)))
+                .andExpect(jsonPath("$[0].name").value("John Doe"))
+                .andExpect(jsonPath("$[0].department.name").value("Engineering"));
     }
 
     @Test
     void shouldUpdateEmployee() throws Exception {
-        String requestBody = "{\"id\":1,\"name\":\"Deepikaa Updated\",\"department\":\"Finance\"}";
+        String requestBody = "{\"id\":1,\"name\":\"John Doe Updated\",\"department\":{\"id\":3,\"name\":\"Finance\"}}";
 
         mockMvc.perform(put("/employees/1")
                         .contentType("application/json")
                         .content(requestBody))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Deepikaa Updated"))
-                .andExpect(jsonPath("$.department").value("Finance"));
+                .andExpect(jsonPath("$.name").value("John Doe Updated"))
+                .andExpect(jsonPath("$.department.name").value("Finance"));
     }
 }
