@@ -38,6 +38,11 @@ public class EmployeeController extends ResponseEntityExceptionHandler {
         employeeService.updateEmployee(employee);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteEmployee(@PathVariable Integer id) throws EmployeeNotFoundException {
+        employeeService.deleteEmployee(id);
+    }
+
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
                                                                  HttpHeaders headers,
