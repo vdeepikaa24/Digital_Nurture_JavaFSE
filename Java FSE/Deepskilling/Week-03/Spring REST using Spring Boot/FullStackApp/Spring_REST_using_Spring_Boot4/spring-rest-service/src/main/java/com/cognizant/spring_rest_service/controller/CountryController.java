@@ -21,18 +21,15 @@ public class CountryController {
         return null;
     }
 
-    // 3. POST (Create)
+    // 3. POST (Create) 
     @PostMapping
-    public Country addCountry(@RequestBody @Valid Country country) {
+    public void addCountry() {
         System.out.println("Start");
-        System.out.println(country.getName());
-        return country;
     }
 
     // 4. PUT (Update)
     @PutMapping
     public Country updateCountry(@RequestBody @Valid Country country) {
-        // Implementation needed later
         return country;
     }
 
