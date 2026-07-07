@@ -21,10 +21,12 @@ public class CountryController {
         return null;
     }
 
-    // 3. POST (Create) 
+    // 3. POST (Create) - Updated to read Country bean from payload
     @PostMapping
-    public void addCountry() {
+    public Country addCountry(@RequestBody @Valid Country country) {
         System.out.println("Start");
+        System.out.println(country.toString()); 
+        return country; 
     }
 
     // 4. PUT (Update)
