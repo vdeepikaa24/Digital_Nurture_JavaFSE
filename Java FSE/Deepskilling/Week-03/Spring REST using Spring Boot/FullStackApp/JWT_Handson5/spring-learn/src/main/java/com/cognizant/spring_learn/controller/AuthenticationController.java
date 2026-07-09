@@ -1,7 +1,6 @@
 package com.cognizant.spring_learn.controller;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
+import com.cognizant.spring_learn.security.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,10 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
-import javax.crypto.SecretKey;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,27 +23,23 @@ public class AuthenticationController {
 
     private static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
 
-    private static final String SECRET_STRING = "your-very-long-and-secure-secret-key-must-be-at-least-32-bytes";
-    private final SecretKey key = Keys.hmacShaKeyFor(SECRET_STRING.getBytes(StandardCharsets.UTF_8));
-
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public AuthenticationController(UserDetailsService userDetailsService,
-                                     PasswordEncoder passwordEncoder) {
+                                     PasswordEncoder passwordEncoder,
+                                     JwtService jwtService) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private String generateJwt(String user) {
         log.info("Generating JWT for user: {}", user);
-        
-        return Jwts.builder()
-                .subject(user)
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1200000))
-                .signWith(key)
-                .compact();
+        // Use the same signing key + algorithm as JwtAuthorizationFilter/JwtService verification
+        return jwtService.generateToken(user);
     }
 
     private String getUser(String authHeader) {
@@ -68,7 +62,8 @@ public class AuthenticationController {
 
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Basic ")) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Missing Basic Authorization header");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Missing Basic Authorization header");
         }
 
         String username = getUser(authHeader);
@@ -76,20 +71,19 @@ public class AuthenticationController {
 
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            
+
             if (!passwordEncoder.matches(rawPassword, userDetails.getPassword())) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
             }
 
             String token = generateJwt(userDetails.getUsername());
-            
+
             log.info("JWT generated successfully for user={}", userDetails.getUsername());
 
             Map<String, String> map = new HashMap<>();
             map.put("token", token);
-            
-            return ResponseEntity.ok(map);
 
+            return ResponseEntity.ok(map);
         } catch (Exception ex) {
             log.error("Authentication error: {}", ex.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
