@@ -10,7 +10,6 @@
     </parent>
     <groupId>com.cognizant</groupId>
     <artifactId>spring-learn</artifactId>
-
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-learn</name>
 
@@ -28,7 +27,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- JWT generation -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
