@@ -1,0 +1,5 @@
+spring:
+  security:
+    jwt:
+      # Must be a secure, random string of at least 32 characters
+      secret: "mySuperSecretKeyMustBe32CharactersLong!"
