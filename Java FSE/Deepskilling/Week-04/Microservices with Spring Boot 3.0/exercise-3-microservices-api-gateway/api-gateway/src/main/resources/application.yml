@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  cloud:
+    gateway:
+      routes:
+        # 1. CUSTOMER SERVICE ROUTE
+        - id: customer_service_route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/customers/**
+          filters:
+            - RewritePath=/api/v1/customers/(?<segment>.*), /$\{segment}
+            - LocalResponseCache=3m # Caches responses on the gateway for 3 minutes
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+                key-resolver: "#{@userKeyResolver}"
+
+        # 2. BILLING SERVICE ROUTE
+        - id: billing_service_route
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/billing/**
+          filters:
+            - RewritePath=/api/v1/billing/(?<segment>.*), /$\{segment}
+            - LocalResponseCache=3m # Caches responses on the gateway for 3 minutes
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+                key-resolver: "#{@userKeyResolver}"
