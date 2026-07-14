@@ -1,0 +1,27 @@
+server:
+  port: 8083 
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, circuitbreakers 
+  endpoint:
+    health:
+      show-details: always 
+  health:
+    circuitbreakers:
+      enabled: true
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      thirdPartyPaymentApi:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5           # Tracks only the last 5 calls
+        failureRateThreshold: 50       # Trips OPEN if 50%+ of calls fail
+        slowCallRateThreshold: 50      # Trips OPEN if 50%+ of calls take longer than the threshold below
+        slowCallDurationThreshold: 2s  # Any call taking longer than 2 seconds is flagged as "slow"
+        waitDurationInOpenState: 15s   # Stays OPEN for 15 seconds before transitioning to HALF-OPEN to retry
+        permittedNumberOfCallsInHalfOpenState: 2 # Sends 2 trial requests to check if third-party is healthy again
