@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.column {
+  flex: 1;
+  padding: 0 20px;
+}
+
+.divider {
+  width: 2px;
+  background-color: green; /* Green vertical divider */
+  height: 300px; /* Adjust height as needed */
+}
