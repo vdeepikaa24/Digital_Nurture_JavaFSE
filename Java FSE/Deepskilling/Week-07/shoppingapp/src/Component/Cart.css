@@ -1,0 +1,11 @@
+.shopping-table {
+  margin: 0 auto; /* Centers the table */
+  border-collapse: collapse;
+  width: 200px;
+}
+
+.shopping-table, .shopping-table th, .shopping-table td {
+  border: 1px solid #999;
+  text-align: center;
+  padding: 5px;
+}
