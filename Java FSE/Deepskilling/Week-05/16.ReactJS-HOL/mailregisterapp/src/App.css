@@ -1,0 +1,13 @@
+/* App.css */
+.App {
+  display: flex;
+  justify-content: center; /* Horizontally centers the form */
+  align-items: center;     /* Vertically centers the form */
+  min-height: 100vh;       /* Ensures the container takes full viewport height */
+  font-family: Arial, sans-serif;
+}
+
+/* Optional: Adds space around the form for better readability */
+form {
+  padding: 20px;
+}
